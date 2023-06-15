@@ -1,0 +1,125 @@
+df <-load("C:\\Users\\madelyn.fernandez\\Documents\\Machine Learning")
+df <-load("C:\Users\madelyn.fernandez\Documents\Machine Learning")
+df<-load("C:\\Users\\madelyn.fernandez\\Documents\\Machine Learning")
+df<-load("C:\\Users\\madelyn.fernandez\\Documents\\Machine Learning\\carIns_final.Rdata")
+carIns_final$bodyStyle
+unique(carIns_final$bodyStyle)
+install.packages('dplyr')
+library(dplyr)
+carIns_final %>% group_by(bodyStyle)
+carIns_final %>% group_by(bodyStyle) %>% count()
+carIns_final %>% group_by(bodyStyle, fuelType) %>% count()
+carIns_final %>% group_by(bodyStyle, cityMpg) %>% count()
+carIns_final %>% group_by(bodyStyle) %>% mean(cityMpg)
+carIns_final %>% group_by(bodyStyle) %>% summmarize(cityMpg.mean = mean(cityMpg))
+carIns_final %>% group_by(bodyStyle) %>% summmarize(cityMpg.mean = mean(cityMpg))
+carIns_final %>% group_by(bodyStyle) %>% summarize(cityMpg.mean = mean(cityMpg))
+carIns_final %>% group_by(bodyStyle) %>% summarize(cityMpg.mean = mean(cityMpg), cityMpg.sd = sd(cityMpg))
+carIns_final %>% group_by(bodyStyle) %>% summarize(cityMpg.mean = mean(cityMpg), cityMpg.sd = sd(cityMpg), highwayMpg.mean = mean(highwayMpg))
+installed.packages("ggplot2")
+ggplot(carIns_final, aes(x = cityMpg, y = highwayMpg))
+install.packages("ggplot2")
+ggplot(carIns_final, aes(x = cityMpg, y = highwayMpg)) + geom_point()
+ggplot2(carIns_final, aes(x = cityMpg, y = highwayMpg)) + geom_point()
+ggplot(datos, aes(x = cityMpg, y = highwayMpg)) +
+geom_point() +
+labs(x = "City MPG", y = "Highway MPG") +
+ggtitle("Relación entre City MPG y Highway MPG")
+ggplot(datos, aes(x = cityMpg, y = highwayMpg)) + geom_point() + labs(x = "City MPG", y = "Highway MPG") + ggtitle("Relación entre City MPG y Highway MPG")
+install.packages("ggplot2")
+library(ggplot2)
+ggplot(datos, aes(x = cityMpg, y = highwayMpg)) + geom_point() + labs(x = "City MPG", y = "Highway MPG") + ggtitle("Relación entre City MPG y Highway MPG")
+ggplot(datos, aes(x = cityMpg, y = highwayMpg)) +
+geom_point() +
+labs(x = "City MPG", y = "Highway MPG") +
+ggtitle("Relación entre City MPG y Highway MPG")
+ggplot(datos, aes(x = cityMpg, y = highwayMpg)) + geom_point() + labs(x = "City MPG", y = "Highway MPG") + ggtitle("Relación entre City MPG y Highway MPG")
+ggplot(carIns_final, aes(x = cityMpg, y = highwayMpg)) + geom_point() + labs(x = "City MPG", y = "Highway MPG") + ggtitle("Relación entre City MPG y Highway MPG")
+ggplot(bodyStyle_df, aes(x = bodyStyle, y = count)) +
+geom_bar(stat = "identity", fill = "steelblue") +
+labs(x = "Body Style", y = "Count") +
+ggtitle("Distribution of Cars by Body Style")
+ggplot(carIns_final, aes(x = bodyStyle, y = count)) +
+geom_bar(stat = "identity", fill = "steelblue") +
+labs(x = "Body Style", y = "Count") +
+ggtitle("Distribution of Cars by Body Style")
+ggplot(carIns_final, aes(x = bodyStyle)) +
+geom_bar(fill = "steelblue") +
+labs(x = "Body Style", y = "Count") +
+ggtitle("Distribution of Cars by Body Style")
+ggplot(carIns_final, aes(x = cut(price, breaks = seq(0, max(price), by = 5000)))) +
+geom_bar(fill = "steelblue") +
+labs(x = "Price", y = "Count") +
+ggtitle("Distribution of Cars by Price") +
+scale_x_discrete(labels = function(x) gsub("\\,", " - ", x))
+ggplot(carIns_final, aes(x = cut(price, breaks = seq(0, max(price), by = 5000)))) +
+geom_bar(aes(y = ..density..), fill = "steelblue", alpha = 0.5) +
+geom_density(alpha = 0.2, fill = "orange") +
+labs(x = "Price", y = "Density") +
+ggtitle("Distribution of Cars by Price with Density Estimation") +
+scale_x_discrete(labels = function(x) gsub("\\,", " - ", x))
+ggplot(carIns_final, aes(x = cut(price, breaks = seq(0, max(price), by = 5000)))) +
+geom_bar(aes(y = after_stat(density)), fill = "steelblue", alpha = 0.5) +
+geom_density(alpha = 0.2, fill = "orange") +
+labs(x = "Price", y = "Density") +
+ggtitle("Distribution of Cars by Price with Density Estimation") +
+scale_x_discrete(labels = function(x) gsub("\\,", " - ", x))
+ggplot(carIns_final, aes(x = price, y = after_stat(density), fill = "Histogram")) +
+geom_freqpoly(binwidth = 5000, alpha = 0.5) +
+geom_density(alpha = 0.2, fill = "orange") +
+labs(x = "Price", y = "Density", fill = "") +
+ggtitle("Distribution of Cars by Price with Density Estimation")
+ggplot(carIns_final, aes(x = price)) +
+geom_histogram(aes(y = ..density..), fill = "steelblue", color = "white", alpha = 0.5) +
+geom_density(fill = "orange", alpha = 0.2) +
+labs(x = "Price", y = "Density") +
+ggtitle("Distribution of Price") +
+theme_minimal()
+ggplot(carIns_final, aes(sample = price)) +
+stat_qq() +
+stat_qq_line() +
+labs(x = "Theoretical Quantiles", y = "Sample Quantiles") +
+ggtitle("Q-Q Plot of Price") +
+theme_minimal()
+ggplot(carIns_final, aes(x = brand, y = price)) +
+geom_boxplot(fill = "steelblue", color = "black") +
+coord_flip() +
+labs(x = "Brand", y = "Price") +
+ggtitle("Price Distribution by Brand") +
+theme_minimal()
+ggplot(carIns_final, aes(x = marca, y = price)) +
+geom_boxplot(fill = "steelblue", color = "black") +
+coord_flip() +
+labs(x = "Brand", y = "Price") +
+ggtitle("Price Distribution by Brand") +
+theme_minimal()
+ggplot(carIns_final, aes(x = make, y = price)) +
+geom_boxplot(fill = "steelblue", color = "black") +
+coord_flip() +
+labs(x = "Make", y = "Price") +
+ggtitle("Price Distribution by Make") +
+theme_minimal()
+ggplot(carIns_final, aes(x = price)) +
+geom_histogram(binwidth = 5000, fill = "steelblue", color = "black") +
+facet_wrap(~nDoors, nrow = 1) +
+labs(x = "Price", y = "Count") +
+ggtitle("Price Distribution by nDoors") +
+theme_minimal()
+ggplot(carIns_final, aes(x = price)) +
+geom_histogram(binwidth = 5000, fill = "steelblue", color = "black") +
+facet_grid(nDoors ~ bodyStyle) +
+labs(x = "Price", y = "Count") +
+ggtitle("Price Distribution by bodyStyle and nDoors") +
+theme_minimal()
+ggplot(carIns_final, aes(x = price)) +
+geom_histogram(binwidth = 5000, fill = "steelblue", color = "black") +
+facet_grid(nDoors ~ bodyStyle, scales = "free_y") +
+labs(x = "Price", y = "Count") +
+ggtitle("Price Distribution by bodyStyle and nDoors") +
+theme_minimal()
+save(datos, file = "C:\Users\madelyn.fernandez\Documents\Machine Learning\HANDS2")
+save(datos, file = "C:\Users\madelyn.fernandez\Documents\Machine Learning\HANDS2\handsOn2.RData")
+save(carIns_final, file = "C:\Users\madelyn.fernandez\Documents\Machine Learning\HANDS2\handsOn2.RData")
+save(carIns_final, file = "C:\Users\madelyn.fernandez\Documents\Machine Learning\HANDS2\handsOn2resolve.RData")
+save(carIns_final, file = "C:\\Users\\madelyn.fernandez\\Documents\\Machine Learning\\HANDS2\\handsOn2resolve.RData")
+savehistory("C:/Users/madelyn.fernandez/Documents/Machine Learning/Hands3/HandResolve3.txt")
